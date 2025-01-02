@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me | Magi Sharma J</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fc;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .section-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-wrapper {
+      flex: 1;
+      max-width: 50%;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+      object-fit: cover;
+      filter: brightness(85%);
+    }
+
+    .image-wrapper:hover img {
+      transform: scale(1.1);
+      opacity: 0.85;
+    }
+
+    .content-wrapper {
+      flex: 1;
+      max-width: 45%;
+      position: relative;
+      z-index: 3;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+      margin-left: 20px;
+    }
+
+    .content-wrapper h3 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 15px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .content-wrapper p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 20px;
+      text-align: justify;
+      letter-spacing: 0.5px;
+    }
+
+    .content-wrapper .btn {
+      padding: 12px 30px;
+      background-color: #ff5733;
+      color: white;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .content-wrapper .btn:hover {
+      background-color: #ff451a;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .back-to-home-btn {
+      padding: 12px 30px;
+      background-color: #006f87;
+      color: white;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .back-to-home-btn:hover {
+      background-color: #00566b;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Adjust layout for mobile */
+    @media (max-width: 768px) {
+      .section-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .image-wrapper {
+        max-width: 80%;
+        margin-bottom: 20px;
+      }
+
+      .content-wrapper {
+        max-width: 80%;
+        position: static;
+        transform: none;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-left: 0;
+        margin-top: 20px;
+        padding: 20px;
+      }
+
+      .content-wrapper h3 {
+        font-size: 1.8rem;
+      }
+
+      .content-wrapper p {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .back-to-home-btn {
+        width: auto;
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content-wrapper h3 {
+        font-size: 1.6rem;
+      }
+
+      .content-wrapper p {
+        font-size: 0.95rem;
+      }
+
+      .back-to-home-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="section-container">
+    <div class="image-wrapper">
+      <img src="assets/op.jpeg" alt="Web Developer" class="interactive-img">
+    </div>
+
+    <div class="content-wrapper" id="about-me-content">
+      <a href="index.html" class="back-to-home-btn">Back to Home</a>
+      <h3>About Me</h3>
+      <p>I'm Magi Sharma J, a passionate web developer specializing in building dynamic and responsive websites. I have experience in HTML, CSS, JavaScript, and Python, and I'm always excited to explore new technologies.</p>
+      <p>In addition to web development, I have a keen interest in UI/UX design and creating user-centric digital experiences. Currently, I'm pursuing my B.Tech at SRM University. I believe in making websites both beautiful and functional, with a focus on performance and accessibility.</p>
+      <a href="skills.html" class="btn">Read My Skills</a>
+    </div>
+  </section>
+
+</body>
+</html>

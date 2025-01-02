@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Contact Form</title>
+    <meta name="description" content="Contact form to send messages via EmailJS">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="contact.css">
+    <script type="text/javascript" src="env.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Your Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="comment" class="form-label">Your Comment:</label>
+                <textarea id="comment" class="form-control" name="comment" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <a href="index.html" class="btn btn-outline-light" style="color: #fff; border-color: #fff; padding: 10px 20px; font-size: 1rem; text-decoration: none; display: inline-block; transition: background-color 0.3s ease; border-radius: 5px; margin-top: 20px;">
+                Back to Home
+              </a>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            emailjs.init(window.env.EMAILJS_PUBLIC_KEY);
+
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const userName = document.getElementById('name').value;
+                const userEmail = document.getElementById('email').value;
+                const userComment = document.getElementById('comment').value;
+
+                emailjs.send(window.env.EMAILJS_SERVICE_ID, window.env.EMAILJS_TEMPLATE_ID_MESSAGE, {
+                    from_name: userName,
+                    from_email: userEmail,
+                    message: userComment
+                })
+                .then(function(response) {
+                    console.log('Message sent successfully!', response);
+
+                    emailjs.send(window.env.EMAILJS_SERVICE_ID, window.env.EMAILJS_TEMPLATE_ID_THANKYOU, {
+                        to_name: userName,
+                        to_email: userEmail
+                    })
+                    .then(function(response) {
+                        alert('Thank you! Your message has been sent, and a confirmation email has been delivered to your inbox.');
+                    }, function(error) {
+                        console.error('Error sending thank you email:', error);
+                    });
+
+                }, function(error) {
+                    console.error('Error sending message:', error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

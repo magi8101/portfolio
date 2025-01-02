@@ -1,0 +1,220 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #5f2c82, #49a09d);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Container Styles */
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out;
+    backdrop-filter: blur(10px);
+}
+
+/* Header Styles */
+h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ff7c7c, #ff9f9f);
+    background-clip: text;
+    color: transparent;
+    animation: pulseText 2s infinite;
+}
+
+@keyframes pulseText {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Form Labels */
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+    color: #ccc;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+/* Input Styles */
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #2c3e50;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    background: #34495e;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+    transform: scale(1.05);
+    outline: none;
+}
+
+/* Textarea Styles */
+textarea {
+    resize: vertical;
+}
+
+/* Submit Button Styles */
+button {
+    width: 100%;
+    padding: 16px;
+    background: #3498db;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #2980b9;
+    transform: translateY(-3px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 30px;
+        margin: 10px;
+    }
+
+    .form-label {
+        font-size: 13px;
+    }
+
+    input[type="text"], input[type="email"], textarea {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 18px;
+    }
+}
+
+/* Loading Effect */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Animation */
+form {
+    animation: bounceForm 0.8s ease-in-out;
+}
+
+@keyframes bounceForm {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(-10px);
+    }
+    40% {
+        transform: translateY(5px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+    80% {
+        transform: translateY(2px);
+    }
+}
+
+/* Focus Effect on Inputs */
+input[type="text"], input[type="email"], textarea {
+    position: relative;
+    overflow: hidden;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    border-radius: 12px;
+    background: #34495e;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+}
+
+input[type="text"]:focus::before, input[type="email"]:focus::before, textarea:focus::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: 12px;
+    animation: fadeInFocus 0.3s ease-out;
+}
+
+@keyframes fadeInFocus {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+h2 {
+    text-align: center;
+    font-weight: bold;
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient from pink to orange */
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 30px;
+    font-size: 2.5rem; /* Adjust size as needed */
+    text-transform: uppercase; /* Make text uppercase for a bold look */
+    letter-spacing: 2px; /* Add some spacing between the letters */
+}
