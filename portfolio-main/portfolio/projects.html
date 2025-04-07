@@ -2,31 +2,869 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects | Magi Sharma J</title>
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3a0ca3;
+      --accent-color: #7209b7;
+      --background-light: #f8f9fa;
+      --background-dark: #121212;
+      --text-light: #212529;
+      --text-dark: #e9ecef;
+      --card-light: #ffffff;
+      --card-dark: #1e1e1e;
+      --transition-speed: 0.5s;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--background-light);
+      color: var(--text-light);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body.dark-theme {
+      background: var(--background-dark);
+      color: var(--text-dark);
+    }
+
+    /* Loader */
+    .loader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--background-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+
+    body.dark-theme .loader-container {
+      background: var(--background-dark);
+    }
+
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(67, 97, 238, 0.2);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Particles */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .theme-toggle i {
+      font-size: 1.5rem;
+      color: var(--text-light);
+      transition: color 0.3s;
+    }
+
+    body.dark-theme .theme-toggle i {
+      color: var(--text-dark);
+    }
+
+    /* Header Section */
+    .header-section {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-section h1 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .header-section h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: white;
+      border-radius: 2px;
+    }
+
+    .header-section .lead {
+      font-weight: 300;
+      max-width: 700px;
+      margin: 1.5rem auto 0;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards 0.5s;
+    }
+
+    .typing-text {
+      border-right: 3px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: 0 auto;
+      animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white }
+    }
+
+    /* Projects Section */
+    .projects-section {
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    }
+
+    .project-card {
+      background: var(--card-light);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform: translateY(50px);
+      opacity: 0;
+      height: 100%;
+      border: none;
+    }
+
+    body.dark-theme .project-card {
+      background: var(--card-dark);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-card.animate {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.02) rotateX(5deg);
+      box-shadow: 0 15px 40px rgba(67, 97, 238, 0.2);
+      z-index: 1;
+    }
+
+    .card-body {
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), transparent);
+      z-index: -1;
+    }
+
+    .card-title {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover .card-title {
+      transform: translateX(5px);
+    }
+
+    .card-title::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+
+    .project-card:hover .card-title::after {
+      width: 100%;
+    }
+
+    .card-text {
+      color: #6c757d;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      transition: color 0.3s;
+    }
+
+    body.dark-theme .card-text {
+      color: #adb5bd;
+    }
+
+    .badge-language {
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 20px;
+      font-weight: 500;
+      font-size: 0.75rem;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: badgeAppear 0.5s forwards;
+      animation-delay: calc(var(--badge-index) * 0.1s);
+    }
+
+    @keyframes badgeAppear {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .badge-language:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      border: none;
+      border-radius: 30px;
+      padding: 0.6rem 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.7s;
+      z-index: -1;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.1;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      margin: 0 5px;
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: white;
+      color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-section {
+        padding: 3rem 0;
+      }
+      
+      .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .project-card {
+        margin-bottom: 1rem;
+      }
+      
+      .card-body {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: var(--secondary-color);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+  </style>
 </head>
 <body>
+  <!-- Loader -->
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle dark/light mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
   <!-- Header Section -->
-  <section class="container-fluid full-height">
-    <div class="row justify-content-center align-items-center full-height">
-      <div class="col-md-6 text-center black-box">
-        <div class="animate__animated animate__fadeIn animate__delay-1s">
-          <h1 class="section-title">Projects</h1>
-          <p class="section-text">I'm currently working on  building a website for a pharmacy shop which under development. More details will be available soon.</p>
-          <a href="index.html" class="btn btn-outline-light">Back to Home</a>
+  <header class="header-section">
+    <div class="container header-content">
+      <h1 class="display-4 typing-text">My Projects</h1>
+      <p class="lead">A showcase of my GitHub projects built with passion and creativity.</p>
+    </div>
+  </header>
+  
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+        <!-- Project Card - code-craft -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">Code Craft</h5>
+              <p class="card-text">This repo is about a hackathon conducted by CodeCraft; find all necessary files and more.</p>
+              <p>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 1">CSS</span>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 2">HTML</span>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 3">JavaScript</span>
+              </p>
+              <a href="https://github.com/magi8101/code-craft" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
         </div>
+
+        <!-- Project Card - friendly-fiesta -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">Friendly Fiesta</h5>
+              <p class="card-text">A project repository primarily using Python.</p>
+              <p>
+                <span class="badge bg-info badge-language" style="--badge-index: 1">Python</span>
+              </p>
+              <a href="https://github.com/magi8101/friendly-fiesta" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card - writers-backend -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">Writers Backend</h5>
+              <p class="card-text">The powerhouse behind WriteStart ensuring smooth data management and authentication.</p>
+              <p>
+                <span class="badge bg-info badge-language" style="--badge-index: 1">Python</span>
+              </p>
+              <a href="https://github.com/magi8101/writers-backend" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card - agnishield-backend -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">Agnishield Backend</h5>
+              <p class="card-text">A backend solution designed for robust security and performance.</p>
+              <p>
+                <span class="badge bg-info badge-language" style="--badge-index: 1">Python</span>
+              </p>
+              <a href="https://github.com/sanchitmahajann/agnishield-backend" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card - writerstart -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">WriteStart</h5>
+              <p class="card-text">A sleek and user-friendly frontend for the complete writing platform experience.</p>
+              <p>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 1">HTML</span>
+              </p>
+              <a href="https://github.com/magi8101/writerstart" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card - make_my_trip -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">Make My Trip Clone</h5>
+              <p class="card-text">A functional clone of the MakeMyTrip homepage hero section with modern UI and dynamic interactions.</p>
+              <p>
+                <span class="badge bg-warning badge-language" style="--badge-index: 1">JavaScript</span>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 2">CSS</span>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 3">HTML</span>
+              </p>
+              <a href="https://github.com/magi8101/make_my_trip" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card - TMDB-movie-app -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">TMDB Movie App</h5>
+              <p class="card-text">A sleek front-end project utilizing the TMDB API to showcase movie information.</p>
+              <p>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 1">HTML</span>
+                <span class="badge bg-warning badge-language" style="--badge-index: 2">JavaScript</span>
+              </p>
+              <a href="https://github.com/magi8101/TMDB-movie-app" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card - magi8101 (Personal Website) -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">Personal Website</h5>
+              <p class="card-text">A minimalist HTML project representing my personal website.</p>
+              <p>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 1">HTML</span>
+              </p>
+              <a href="https://github.com/magi8101/magi8101" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card - form-builder -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">Form Builder</h5>
+              <p class="card-text">The ultimate form creation tool built with Next.js, TypeScript, and Tailwind CSS.</p>
+              <p>
+                <span class="badge bg-primary badge-language" style="--badge-index: 1">TypeScript</span>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 2">CSS</span>
+                <span class="badge bg-warning badge-language" style="--badge-index: 3">JavaScript</span>
+              </p>
+              <a href="https://github.com/magi8101/form-builder" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card - pokedex -->
+        <div class="col">
+          <div class="card h-100 project-card">
+            <div class="card-body">
+              <h5 class="card-title">Pokedex</h5>
+              <p class="card-text">A project showcasing a Pokedex built with TypeScript and elegantly styled with CSS.</p>
+              <p>
+                <span class="badge bg-primary badge-language" style="--badge-index: 1">TypeScript</span>
+                <span class="badge bg-secondary badge-language" style="--badge-index: 2">CSS</span>
+                <span class="badge bg-warning badge-language" style="--badge-index: 3">JavaScript</span>
+              </p>
+              <a href="https://github.com/magi8101/pokedex" class="btn btn-primary" target="_blank">View Repository</a>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
   </section>
-
-  <!-- Particles.js Background -->
-  <div id="particles-js"></div>
-
-  <!-- JS Scripts -->
-  <script src="js/particles.min.js"></script>
-  <script src="js/script.js"></script>
+  
+  <!-- Scroll to top button -->
+  <div class="scroll-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2025 Magi Sharma J. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/magi8101" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Font Awesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  
+  <!-- Custom JS -->
+  <script>
+    // Loader
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.querySelector('.loader-container').style.opacity = '0';
+        setTimeout(function() {
+          document.querySelector('.loader-container').style.display = 'none';
+        }, 500);
+      }, 1000);
+    });
+    
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    const icon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-theme');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      
+      // Toggle icon
+      if (body.classList.contains('dark-theme')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+    
+    // Project Card Animation
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    const animateCards = () => {
+      projectCards.forEach((card, index) => {
+        const cardPosition = card.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.2;
+        
+        if (cardPosition < screenPosition) {
+          setTimeout(() => {
+            card.classList.add('animate');
+          }, index * 100);
+        }
+      });
+    };
+    
+    // Run on page load
+    animateCards();
+    
+    // Run on scroll
+    window.addEventListener('scroll', animateCards);
+    
+    // Scroll to top button
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+    
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 80,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: '#4361ee'
+        },
+        shape: {
+          type: 'circle',
+          stroke: {
+            width: 0,
+            color: '#000000'
+          }
+        },
+        opacity: {
+          value: 0.5,
+          random: false,
+          anim: {
+            enable: false,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: false,
+            speed: 40,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#4361ee',
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'grab'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 140,
+            line_linked: {
+              opacity: 1
+            }
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 </body>
 </html>
